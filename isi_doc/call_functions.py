@@ -104,3 +104,4 @@ with open('output.csv', 'w') as csvfile:
 # Write Node Count
     writer.writerow({'node_count', api_response_onefs.total})
     print("GET NODE NR check")
+#Hallo
