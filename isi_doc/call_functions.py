@@ -88,9 +88,8 @@ except ApiException as e:
 
 # Format output in CSV
 with open('output.csv', 'w') as csvfile:
-    fieldnames = ['onefsversion']
     writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-
+# Write OneFS Version
     writer.writerow({'onefs_version', api_response_onefsversion.nodes[0].version})
     print("ONEFS check")
 # Write if cluster is in compliance mode
@@ -100,8 +99,10 @@ with open('output.csv', 'w') as csvfile:
     writer.writerow({'cluster_identity', api_response_identity.name})
     print("GET NAME check")
 # Write Node Serial Number
-
+    json_data = json.loads(api_response_onefs.nodes)
+    #print(json_data.get('hardware'))
+    writer.writerow({'Serial Number', ''.join(map(str, api_response_onefs.nodes))})
+    print("SERIAL NUMBER Check")
 # Write Node Count
     writer.writerow({'node_count', api_response_onefs.total})
     print("GET NODE NR check")
-#Hallo
