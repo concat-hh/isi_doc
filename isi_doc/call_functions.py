@@ -338,26 +338,31 @@ except ApiException as e:
 
 with open('output.csv', 'w') as csvfile:
     writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-# + Write OneFS Version
+# 1) Write OneFS Version
     writer.writerow({'onefs_version', api_response_onefsversion.nodes[0].version})
     print("ONEFS check")
-# + Write if cluster is in compliance mode
+# 2) Write if cluster is in compliance mode
     writer.writerow({'cluster_compliance_mode', api_response_clusterconfig.is_compliance})
     print("COMPLIANCE check")
-# + Write Cluster Name
+# 3) Write Date
+    writer.writerow({'date', date.today()})
+# 4) Write Cluster Name
     writer.writerow({'cluster_identity', api_response_identity.name})
     print("GET NAME check")
-# + Write Node Serial Number
-# Get number of nodes
-    number_of_nodes = api_response_onefs.total
+# 5) Write Node-Count
+    writer.writerow({'node-count', api_response_onefs.total})
+    print("GET NODE NR check")
+# 6) Write Node-Types
+    writer.writerow({'node-types', api_response_onefs.nodes[0].hardware.family_code})
+    print("GET NODE SERIES check")
+
+
+# 6) Write Node Serial Number
 # iteration over nodes to get serial numbers
     serial_numbers = []
-    for i in range(number_of_nodes):
+    for i in range(api_response_onefs.total):
         serial_numbers.append(api_response_onefs.nodes[i].hardware.serial_number)
 # append list elements to single string
     str_serial_numbers = ', '.join(serial_numbers)
     writer.writerow({'Serial Numbers', str_serial_numbers})
     print("SERIAL NUMBER Check")
-# + Write Node Count
-    writer.writerow({'node_count', api_response_onefs.total})
-    print("GET NODE NR check")
