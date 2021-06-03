@@ -56,7 +56,6 @@ api_instance_event = isi_sdk_8_2_2.EventApi(isi_sdk_8_2_2.ApiClient(configuratio
 # 9_0_0 instances
 api_instance_onefs = isi_sdk_9_0_0.ClusterApi(isi_sdk_9_0_0.ApiClient(configuration))
 
-
 # +---------------------------------------+
 # + All functions to get data from Isilon +
 # +---------------------------------------+
@@ -82,11 +81,10 @@ try:
 except ApiException as e:
     print("Exception when calling ClusterApi->get_cluster_identity: %s\n" % e)
 
+# +---------------------------------------+
+# + Format output in CSV                  +
+# +---------------------------------------+
 
-
-
-
-# Format output in CSV
 with open('output.csv', 'w') as csvfile:
     writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 # Write OneFS Version
