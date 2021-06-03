@@ -149,13 +149,27 @@ api_instance_protocols = isi_sdk_8_2_2.ProtocolsApi(api_client)
 api_instance_node = isi_sdk_8_2_2.ClusterNodesApi(isi_sdk_8_2_2.ApiClient(configuration))
 api_instance_network = isi_sdk_8_2_2.NetworkApi(isi_sdk_8_2_2.ApiClient(configuration))
 api_instance_zones = isi_sdk_8_2_2.ZonesApi(isi_sdk_8_2_2.ApiClient(configuration))
-api_instance_auth_ad = isi_sdk_8_2_2.AuthApi(isi_sdk_8_2_2.ApiClient(configuration))
+api_instance_auth_ad = isi_sdk_8_2_2.AuthApi(isi_sdk_8_2_2.ApiClient(configuration))# gleiche instance wie dadrunter
 api_instance_auth_ldap = isi_sdk_8_2_2.AuthApi(isi_sdk_8_2_2.ApiClient(configuration))
 api_instance_license = isi_sdk_8_2_2.LicenseApi(isi_sdk_8_2_2.ApiClient(configuration))
 api_instance_event = isi_sdk_8_2_2.EventApi(isi_sdk_8_2_2.ApiClient(configuration))
+api_instance_groupnet_sum = isi_sdk_8_2_2.GroupnetsSummaryApi(isi_sdk_8_2_2.ApiClient(configuration)) #new
+api_instance_groupnet_net = isi_sdk_8_2_2.NetworkGroupnetsApi(isi_sdk_8_2_2.ApiClient(configuration)) #new
+api_instance_job = isi_sdk_8_2_2.JobApi(isi_sdk_8_2_2.ApiClient(configuration))                       #new
+api_instance_sync = isi_sdk_8_2_2.SyncApi(isi_sdk_8_2_2.ApiClient(configuration))                     #new
+api_instance_snapshot = isi_sdk_8_2_2.SnapshotApi(isi_sdk_8_2_2.ApiClient(configuration))             #new
+api_instance_quotas = isi_sdk_8_2_2.QuotaApi(isi_sdk_8_2_2.ApiClient(configuration))                  #new
+api_instance_storagepool = isi_sdk_8_2_2.StoragepoolApi(isi_sdk_8_2_2.ApiClient(configuration))       #new
+api_instance_cluster = isi_sdk_8_2_2.ClusterApi(isi_sdk_8_2_2.ApiClient(configuration))               #new
+api_instance_protocols2 = isi_sdk_8_2_2.ProtocolsApi(isi_sdk_8_2_2.ApiClient(configuration))          #new
+api_instance_snap = isi_sdk_8_2_2.SnapshotApi(isi_sdk_8_2_2.ApiClient(configuration))
 
 # 9_0_0 instances
 api_instance_onefs = isi_sdk_9_0_0.ClusterApi(isi_sdk_9_0_0.ApiClient(configuration))
+api_instance_network_9_0_0 = isi_sdk_9_0_0.NetworkApi(isi_sdk_9_0_0.ApiClient(configuration))         #new
+api_instance_clusternode = isi_sdk_9_0_0.ClusterNodesApi(isi_sdk_9_0_0.ApiClient(configuration))      #new
+api_instance_hardware = isi_sdk_9_0_0.HardwareApi(isi_sdk_9_0_0.ApiClient(configuration))             #new
+api_instance_remote = isi_sdk_9_0_0.RemotesupportApi(isi_sdk_9_0_0.ApiClient(configuration))          #new
 
 # +---------------------------------------+
 # + All functions to get data from Isilon +
@@ -185,26 +199,165 @@ try:
 except ApiException as e:
     print("Exception when calling ClusterApi->get_cluster_identity: %s\n" % e)
 
+#Get Software License                                                                      #new
+try:
+    api_response_license = api_instance_license.list_license_licenses()
+except ApiException as e:
+    print("Exception when calling LicenseApi->list_license_licenses: %s\n" % e)
+
+#Get Groupnet Summary                                                                      #new
+try:
+    api_response_groupnet_sum = api_instance_groupnet_sum.get_groupnets_summary()
+except ApiException as e:
+    print("Exception when calling GroupnetsSummaryApi->get_groupnets_summary: %s\n" % e)
+
+#Get Groupnet Networks                                                                     #new bei error api_instance_network_9_0_0 versuchen
+try:
+    api_response_groupnet_net = api_instance_network.list_network_groupnets()
+except ApiException as e:
+    print("Exception when calling NetworkApi->list_network_groupnets: %s\n" % e)
+
+#Get NTP Server                                                                            #new
+try:
+    api_response_ntp = api_instance_protocols2.list_ntp_servers()
+except ApiException as e:
+    print("Exception when calling ProtocolsApi->list_ntp_servers: %s\n" % e)
+
+#Get SNMP Settings                                                                         #new
+try:
+    api_response_snmp = api_instance_protocols2.get_snmp_settings()
+except ApiException as e:
+    print("Exception when calling ProtocolsApi->get_snmp_settings: %s\n" % e)
+
+#Get Subnet Information                                                                    #new bei error api_instance_network_9_0_0 versuchen
+try:
+    api_response_subnet = api_instance_network.get_network_subnets()
+except ApiException as e:
+    print("Exception when calling NetworkApi->get_network_subnets: %s\n" % e)
+#Get IP Pools Interfaces                                                                   #new bei error api_instance_network_9_0_0 versuchen
+try:
+    api_response_net_interface = api_instance_network.get_network_interfaces()
+except ApiException as e:
+    print("Exception when calling NetworkApi->get_network_interfaces: %s\n" % e)
+
+#Get IP Pool Information                                                                   #new bei error api_instance_network_9_0_0 versuchen
+try:
+    api_response_network = api_instance_network.get_network_pools()
+except ApiException as e:
+    print("Exception when calling NetworkApi->get_network_pools: %s\n" % e)
+
+#Get Authentication Provider                                                               #new
+try:
+    api_response_auth_ad = api_instance_auth_ad.list_providers_ads()
+except ApiException as e:
+    print("Exception when calling AuthApi->list_providers_ads: %s\n" % e)
+
+#Get Access Zones                                                                          #new
+try:
+    api_response_zones = api_instance_zones.list_zones()
+except ApiException as e:
+    print("Exception when calling ZonesApi->list_zones: %s\n" % e)
+
+#Get Role Based Access                                                                     #new
+try:
+    api_response_rolelist = api_instance_auth_ad.list_auth_roles()
+except ApiException as e:
+    print("Exception when calling AuthApi->list_auth_roles: %s\n" % e)
+
+#Get Job Statistic                                                                         #new
+try:
+    api_response_job = api_instance_job.get_job_statistics()
+except ApiException as e:
+    print("Exception when calling JobApi->get_job_statistics: %s\n" % e)
+
+#Get Job jobs                                                                              #new
+try:
+    api_response_joblist = api_instance_job.list_job_jobs()
+except ApiException as e:
+    print("Exception when calling JobApi->list_job_jobs: %s\n" % e)
+
+#Get SyncIQ Settings                                                                       #new
+try:
+    api_response_syncIQ = api_instance_sync.list_sync_policies()
+except ApiException as e:
+    print("Exception when calling SyncApi->list_sync_policies: %s\n" % e)
+
+#Get Snapshot Settings                                                                     #new
+try:
+    api_response_snapset = api_instance_snap.get_snapshot_settings()
+except ApiException as e:
+    print("Exception when calling SnapshotApi->get_snapshot_settings: %s\n" % e)
+
+#Get Snapshot Schedule                                                                     #new
+try:
+    api_response_snapschedule = api_instance_snap.list_snapshot_schedules()
+except ApiException as e:
+    print("Exception when calling SnapshotApi->list_snapshot_schedules: %s\n" % e)
+
+#Get SmartQuotas                                                                           #new
+try:
+    api_response_quotas = api_instance_quotas.list_quota_quotas()
+except ApiException as e:
+    print("Exception when calling QuotaApi->list_quota_quotas: %s\n" % e)
+
+#Get Node Pool                                                                             #new
+try:
+    api_response_nodepool = api_instance_storagepool.list_storagepool_nodepools()
+except ApiException as e:
+    print("Exception when calling StoragepoolApi->list_storagepool_nodepools: %s\n" % e)
+
+#Get NDMP                                                                                  #new
+try:
+    api_response_ndmp = api_instance_protocols.get_ndmp_settings_global()
+except ApiException as e:
+    print("Exception when calling ProtocolsApi->get_ndmp_settings_global: %s\n" % e)
+
+#Get SMB Share                                                                             #new
+try:
+    api_response_smb = api_instance_protocols.list_smb_shares()
+except ApiException as e:
+    print("Exception when calling ProtocolsApi->list_smb_shares: %s\n" % e)
+
+#Get NFS Export                                                                            #new
+try:
+    api_response_nfs = api_instance_protocols.list_nfs_exports()
+except ApiException as e:
+    print("Exception when calling ProtocolsApi->list_nfs_exports: %s\n" % e)
+
+#Get SMTP Server                                                                          #new
+try:
+    api_response_smtp = api_instance_cluster.get_cluster_email()
+except ApiException as e:
+    print("Exception when calling ClusterApi->get_cluster_email: %s\n" % e)
+
+#Get SRS
+
 # +---------------------------------------+
 # + Format output in CSV                  +
 # +---------------------------------------+
 
 with open('output.csv', 'w') as csvfile:
     writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-# Write OneFS Version
+# + Write OneFS Version
     writer.writerow({'onefs_version', api_response_onefsversion.nodes[0].version})
     print("ONEFS check")
-# Write if cluster is in compliance mode
+# + Write if cluster is in compliance mode
     writer.writerow({'cluster_compliance_mode', api_response_clusterconfig.is_compliance})
     print("COMPLIANCE check")
-# Write Cluster Name
+# + Write Cluster Name
     writer.writerow({'cluster_identity', api_response_identity.name})
     print("GET NAME check")
-# Write Node Serial Number
-    # json_data = json.loads(api_response_onefs.nodes)
-    # #print(json_data.get('hardware'))
-    # writer.writerow({'Serial Number', ''.join(map(str, api_response_onefs.nodes))})
-    # print("SERIAL NUMBER Check")'
-# Write Node Count
+# + Write Node Serial Number
+# Get number of nodes
+    number_of_nodes = api_response_onefs.total
+# iteration over nodes to get serial numbers
+    serial_numbers = []
+    for i in range(number_of_nodes):
+        serial_numbers.append(api_response_onefs.nodes[i].hardware.serial_number)
+# append list elements to single string
+    str_serial_numbers = ', '.join(serial_numbers)
+    writer.writerow({'Serial Numbers', str_serial_numbers})
+    print("SERIAL NUMBER Check")
+# + Write Node Count
     writer.writerow({'node_count', api_response_onefs.total})
     print("GET NODE NR check")

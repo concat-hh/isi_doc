@@ -1,4 +1,5 @@
-"Isilon OneFS 9.2.0.0 (Release, Build B_9_2_0_BETA_007(RELEASE), 2021-03-25 16:59:30, 0x902003000000007)",onefs_version
+onefs_version,"Isilon OneFS 9.2.0.0 (Release, Build B_9_2_0_BETA_007(RELEASE), 2021-03-25 16:59:30, 0x902003000000007)"
 False,cluster_compliance_mode
 cluster_identity,isihh
-node_count,4
+"JWXNT194900057, JWXNT194900117, JWXNT194900056, JWXNT194900093",Serial Numbers
+4,node_count
