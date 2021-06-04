@@ -366,3 +366,21 @@ with open('output.csv', 'w') as csvfile:
     str_serial_numbers = ', '.join(serial_numbers)
     writer.writerow({'Serial Numbers', str_serial_numbers})
     print("SERIAL NUMBER Check")
+# 7) Write Backend Switch Information
+
+# 8) Write Software License Information
+# iteration over license-list to get all license elements
+    licenses = []
+    for i in range(api_response_license.total):
+        licenses.append(api_response_license.licenses[i].name)
+# append list elements to single string
+    str_licenses = ', '.join(licenses)
+    writer.writerow({'Licenses', str_licenses})
+    print("LICENSES Check")
+# 9) Write Groupnet Information
+    groupnets = []
+    for i in range(api_response_groupnet_sum.summary.count):
+        groupnets.append(api_response_groupnet_sum.summary.list[i].name)
+    str_groupnets = ', '.join(groupnets)
+    writer.writerow({'Groupnets', str_groupnets})
+    print("Groupnets Check")
